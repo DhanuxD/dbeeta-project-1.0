@@ -1,13 +1,4 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:learning_management_systemo_v01/constant/Routes.dart';
-import 'package:learning_management_systemo_v01/controllers/RegisterController.dart';
-
-import '../constant/app_colors.dart';
-import '../utils/styles/font_style.dart';
-import '../utils/styles/input_decorations.dart';
+import '../utils/imports/import_list.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});

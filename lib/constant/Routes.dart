@@ -1,10 +1,4 @@
-import 'dart:collection';
-
-import 'package:get/get_navigation/src/routes/get_route.dart';
-import 'package:learning_management_systemo_v01/screens/home.dart';
-import 'package:learning_management_systemo_v01/screens/login.dart';
-import 'package:learning_management_systemo_v01/screens/register.dart';
-import 'package:learning_management_systemo_v01/screens/splash.dart';
+import '../utils/imports/import_list.dart';
 
 class Routes {
   static const LOGIN = "/login";

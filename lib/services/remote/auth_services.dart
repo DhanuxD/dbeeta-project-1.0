@@ -1,9 +1,5 @@
-import 'package:learning_management_systemo_v01/enums/special.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
-
-import '../constant/const.dart';
-
+import '../../utils/imports/import_list.dart';
 class AuthServices {
   final dio = Dio();
 
@@ -26,6 +22,10 @@ class AuthServices {
       print('Response token: ${response.data['token']}');
 
       if (response.statusCode == 201) {
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        print('Getting token before saving: ${prefs.getString(Special.LOGIN_TOKEN.toString())}');
+        prefs.setString(Special.LOGIN_TOKEN.toString(), response.data['token']);
+        print('Getting token after saving: ${response.data['token']}');
         return response.statusCode;
       } else {
         return response.statusCode;
