@@ -1,6 +1,7 @@
 import '../utils/imports/import_list.dart';
 
 class HomeScreen extends StatefulWidget {
+
   const HomeScreen({super.key});
 
   @override
@@ -8,6 +9,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final LoginController _authController = Get.put(LoginController());
+
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -45,14 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             IconButton(
               onPressed: () async {
-                print('Logout');
-                SharedPreferences prefs = await SharedPreferences.getInstance();
-                print(
-                    'Login token before clear: ${prefs.getString(Special.LOGIN_TOKEN.toString())}');
-                prefs.clear();
-                print(
-                    'Login token after clear: ${prefs.getString(Special.LOGIN_TOKEN.toString())}');
-                Get.toNamed(Routes.LOGIN);
+                _authController.logoutUser();
               },
               icon: const Icon(Icons.logout),
             ),
