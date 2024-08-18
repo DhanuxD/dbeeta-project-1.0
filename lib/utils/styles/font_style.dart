@@ -5,10 +5,11 @@ class CustomLabel {
     Color? color,
     FontWeight? fontWeight,
     required String text,
-    required double fontSize,
+     double? fontSize,
   }) {
     color = color ?? Colors.black;
     fontWeight = fontWeight ?? FontWeight.normal;
+    fontSize = fontSize ?? 16.0;
     return Text(
       text,
       style: GoogleFonts.roboto(
