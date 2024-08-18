@@ -49,9 +49,7 @@ class AuthServices {
   Future<int?> loginUser(
       {required String email, required String password}) async {
     try {
-      print('Sending data to the server---------------->');
-      print('Email: $email');
-      print('Password: $password');
+
 
       final response = await dio.post('${Const.BASE_URL}/login', data: {
         'email': email,
@@ -104,6 +102,36 @@ class AuthServices {
       }
     } catch (e) {
       print('Unexpected error: $e');
+    }
+  }
+
+  Future<Map<String, dynamic>?> getUserIdentity({required String token}) async {
+    try {
+      var header = {
+        "Accept": "application/json",
+        "Authorization": "Bearer $token"
+      };
+      final response = await dio.get(
+        'https://festive-clarke.93-51-37-244.plesk.page/api/v1/user',
+        options: Options(headers: header),
+      );
+
+      if (response.statusCode == 200) {
+        return response.data;
+      } else {
+        print('Failed Status code: --------->${response.statusCode}');
+        return null;
+      }
+    } on DioException catch (dioError) {
+      if (dioError.response != null) {
+        print('DioError: ${dioError.response?.data}');
+      } else {
+        print('DioError without response: ${dioError.message}');
+      }
+      return null;
+    } catch (e) {
+      print('Unexpected error: $e');
+      return null;
     }
   }
 

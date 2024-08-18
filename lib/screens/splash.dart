@@ -7,7 +7,6 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Future.delayed(const Duration(seconds: 3), () {
       getPage();
-      // Get.off(() =>  LoginScreen());
     });
 
     return Scaffold(
@@ -34,6 +33,8 @@ class SplashScreen extends StatelessWidget {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.get(Special.LOGIN_TOKEN.toString()) == null
         ? Get.offNamed(Routes.LOGIN)
-        : Get.offNamed(Routes.HOME);
+        : prefs.getString(Special.USER_ROLE.toString()) == Const.INSTRUCTOR
+            ? Get.offNamed(Routes.INSTRUCTOR_HOME)
+            : Get.offNamed(Routes.HOME);
   }
 }

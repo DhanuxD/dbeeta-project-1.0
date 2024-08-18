@@ -1,3 +1,5 @@
+import 'package:learning_management_systemo_v01/models/user_model.dart';
+
 import '../../utils/imports/import_list.dart';
 
 class LoginController extends GetxController {
@@ -24,21 +26,43 @@ class LoginController extends GetxController {
 
       final responseData =
           await AuthServices().loginUser(email: email, password: password);
-      isLoading.value = true;
+
 
       if (responseData == 200) {
         emailController.text = '';
         passwordController.text = '';
-        Get.snackbar("Success", "Login successful",
-            snackPosition: SnackPosition.TOP,
-            duration: const Duration(seconds: 1));
-        Get.toNamed(Routes.HOME);
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        final response = await AuthServices().getUserIdentity(
+            token: prefs.getString(Special.LOGIN_TOKEN.toString()) ?? '');
+        isLoading.value = false;
+        UserModel user = UserModel.fromJson(response!);
+        print('User role--------->: ${user.role}');
+        prefs.setString(Special.USER_ROLE.toString(), user.role);
+
+        if (user.role == Const.INSTRUCTOR) {
+          Get.snackbar("Hello", user.name,
+              snackPosition: SnackPosition.TOP,
+              duration: const Duration(seconds: 1));
+          await Future.delayed(const Duration(milliseconds: 300));
+          Get.closeAllSnackbars();
+          Get.offNamed(Routes.INSTRUCTOR_HOME);
+        } else if (user.role == Const.STUDENT) {
+          Get.snackbar("Hello", user.name,
+              snackPosition: SnackPosition.TOP,
+              duration: const Duration(seconds: 1));
+          await Future.delayed(const Duration(milliseconds: 300));
+          print('User role------ssssssssssssss--->: ${user.role}');
+          Get.closeAllSnackbars();
+          Get.offAllNamed(Routes.HOME);
+        }
       } else {
+        isLoading.value = false;
         Get.snackbar("Failed", "Login Failed",
             snackPosition: SnackPosition.TOP,
             duration: const Duration(seconds: 1));
       }
     } else {
+      isLoading.value = false;
       Get.snackbar("Error", "Invalid Email",
           snackPosition: SnackPosition.TOP,
           duration: const Duration(seconds: 1));
@@ -61,11 +85,13 @@ class LoginController extends GetxController {
       prefs.clear();
       print(
           'Login token after clear: ${prefs.getString(Special.LOGIN_TOKEN.toString())}');
-      Get.snackbar("Failed", "Logout Successful",
+      Get.snackbar("Success", "Logout Successful",
           snackPosition: SnackPosition.TOP,
           duration: const Duration(seconds: 1));
-
+      await Future.delayed(const Duration(milliseconds: 1000));
+      Get.closeAllSnackbars();
       Get.offAllNamed(Routes.LOGIN);
+
     } else {
       Get.snackbar("Failed", "Logout Failed",
           snackPosition: SnackPosition.TOP,

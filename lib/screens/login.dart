@@ -17,9 +17,10 @@ class LoginScreen extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return PopScope(
-      canPop: false,
+      canPop: true,
       onPopInvoked: (didPop) {
-        Get.close(1);
+        SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+
       },
       child: Scaffold(
         appBar: AppBar(
