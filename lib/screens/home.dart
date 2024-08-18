@@ -32,7 +32,6 @@ class _HomeScreenState extends State<HomeScreen> {
             PopupMenuButton<int>(
               onSelected: (value) async {
                 if (value == 0) {
-                  await _coursesController.getAllCourses();
                 } else if (value == 1) {}
               },
               itemBuilder: (context) => [
