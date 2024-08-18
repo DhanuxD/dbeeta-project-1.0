@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import '../utils/imports/import_list.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -12,6 +13,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return PopScope(
       canPop: false,
       onPopInvoked: (didPop) {
+        SystemChannels.platform.invokeMethod('SystemNavigator.pop');
       },
       child: Scaffold(
         appBar: AppBar(
@@ -42,7 +44,16 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: const Icon(Icons.more_vert),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () async {
+                print('Logout');
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                print(
+                    'Login token before clear: ${prefs.getString(Special.LOGIN_TOKEN.toString())}');
+                prefs.clear();
+                print(
+                    'Login token after clear: ${prefs.getString(Special.LOGIN_TOKEN.toString())}');
+                Get.toNamed(Routes.LOGIN);
+              },
               icon: const Icon(Icons.logout),
             ),
           ],
@@ -55,7 +66,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
-
       ),
     );
   }

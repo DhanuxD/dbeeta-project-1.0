@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
-import 'package:learning_management_systemo_v01/services/auth_services.dart';
-
-import '../constant/Routes.dart';
+// // import 'package:flutter/cupertino.dart';
+// import 'package:get/get.dart';
+// import 'package:learning_management_systemo_v01/services/remote/auth_services.dart';
+// import '../constant/Routes.dart';
+import '../utils/imports/import_list.dart';
 
 class LoginController extends GetxController {
   final emailController = TextEditingController();
@@ -19,6 +19,7 @@ class LoginController extends GetxController {
       final responseData =
           await AuthServices().loginUser(email: email, password: password);
       if (responseData == 200) {
+
         emailController.text = '';
         passwordController.text = '';
         Get.snackbar("Success", "Login successful",

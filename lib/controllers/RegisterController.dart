@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:learning_management_systemo_v01/services/auth_services.dart';
+import '../utils/imports/import_list.dart';
 
 class RegisterController extends GetxController {
   final nameController = TextEditingController();
