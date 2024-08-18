@@ -2,7 +2,11 @@ import '../../utils/imports/import_list.dart';
 
 class CoursesController extends GetxController {
   var courses = <dynamic>[].obs;
-
+  @override
+  void onInit() {
+    super.onInit();
+    getAllCourses();
+  }
   Future<void> getAllCourses() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final responseFromService = await CourseService()
