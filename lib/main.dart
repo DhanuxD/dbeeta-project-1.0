@@ -1,6 +1,7 @@
 import 'utils/imports/import_list.dart';
 
 void main() async {
+  Get.lazyPut(()=>LoginController());
   runApp(const MainApp());
 }
 
