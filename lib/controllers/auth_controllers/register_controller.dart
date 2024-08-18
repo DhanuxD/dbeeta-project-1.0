@@ -1,4 +1,4 @@
-import '../utils/imports/import_list.dart';
+import '../../utils/imports/import_list.dart';
 
 class RegisterController extends GetxController {
   final nameController = TextEditingController();
