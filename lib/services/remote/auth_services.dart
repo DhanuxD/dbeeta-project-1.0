@@ -112,7 +112,7 @@ class AuthServices {
         "Authorization": "Bearer $token"
       };
       final response = await dio.get(
-        'https://festive-clarke.93-51-37-244.plesk.page/api/v1/user',
+        '${Const.BASE_URL}/user',
         options: Options(headers: header),
       );
 
@@ -133,11 +133,5 @@ class AuthServices {
       print('Unexpected error: $e');
       return null;
     }
-  }
-
-  Future<void> getAllCourses() async {
-    final response = await dio
-        .get('https://festive-clarke.93-51-37-244.plesk.page/api/v1/courses');
-    print(response.data);
   }
 }

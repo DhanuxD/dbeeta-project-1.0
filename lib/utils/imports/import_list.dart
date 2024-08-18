@@ -16,7 +16,7 @@ export 'package:learning_management_systemo_v01/constant/Routes.dart';
 export 'package:learning_management_systemo_v01/constant/app_colors.dart';
 export 'package:learning_management_systemo_v01/utils/styles/font_style.dart';
 export 'package:learning_management_systemo_v01/utils/styles/input_decorations.dart';
-export 'package:learning_management_systemo_v01/screens/home.dart';
+export 'package:learning_management_systemo_v01/screens/student_screen/student_home.dart';
 export 'package:learning_management_systemo_v01/screens/login.dart';
 export 'package:learning_management_systemo_v01/screens/register.dart';
 export 'package:learning_management_systemo_v01/screens/splash.dart';
@@ -26,7 +26,7 @@ export 'package:learning_management_systemo_v01/enums/special.dart';
 export 'package:learning_management_systemo_v01/services/remote/auth_services.dart';
 export '../../constant/const.dart';
 export '../../models/course_model.dart';
-export '../../services/remote/course_service.dart';
+export '../../services/remote/student_services/course_service.dart';
 export 'package:learning_management_systemo_v01/controllers/courses_controller/courses_controller.dart';
 
 
