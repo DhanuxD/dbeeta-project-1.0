@@ -36,6 +36,7 @@ class LoginController extends GetxController {
         isLoading.value = false;
         UserModel user = UserModel.fromJson(response!);
         print('User role--------->: ${user.role}');
+        print('USer id ---------->${user.id}');
         print('User role--------->: ${prefs.getString(Special.LOGIN_TOKEN.toString())}');
         prefs.setString(Special.USER_ROLE.toString(), user.role);
 
