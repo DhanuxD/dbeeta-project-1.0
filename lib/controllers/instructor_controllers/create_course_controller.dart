@@ -1,4 +1,5 @@
 import 'package:learning_management_systemo_v01/services/remote/instructor_services/manage_courses_service.dart';
+import '../../models/user_model.dart';
 import '../../utils/imports/import_list.dart';
 
 class CreateCourseController extends GetxController {
@@ -6,9 +7,16 @@ class CreateCourseController extends GetxController {
   final courseCategoryController = TextEditingController();
   final courseDescriptionController = TextEditingController();
   var isCreating = false.obs;
+  var courses = <dynamic>[].obs;
+
+
+  @override
+  void onInit() {
+    super.onInit();
+    getAllCoursesByInstructor();
+  }
 
   Future<void> createCourse() async {
-
     final courseName = courseNameController.text.trim();
     final courseCategory = courseCategoryController.text.trim();
     final courseDescription = courseDescriptionController.text.trim();
@@ -42,6 +50,40 @@ class CreateCourseController extends GetxController {
             snackPosition: SnackPosition.TOP,
             duration: const Duration(seconds: 1));
       }
+    }
+  }
+
+  Future<void> getAllCoursesByInstructor() async {
+    print('All courses by instuctor:--------------------------------------');
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final response = await AuthServices().getUserIdentity(
+        token: prefs.getString(Special.LOGIN_TOKEN.toString()) ?? '');
+    UserModel user = UserModel.fromJson(response!);
+    final responseFromService = await CourseService()
+        .getAllCourses(prefs.getString(Special.LOGIN_TOKEN.toString()) ?? '');
+    if (responseFromService.statusCode == 200) {
+      List<Course> coursesList = (responseFromService.data as List)
+          .map((courseJson) => Course.fromJson(courseJson))
+          .toList();
+      courses.clear();
+      // courses.value = coursesList;
+      print('All courses: $coursesList');
+      courses.value =
+          coursesList.where((course) => course.instructor.id == user.id).toList();
+    } else if (responseFromService.statusCode == 500) {
+      Get.snackbar(
+        "Failed",
+        "Data retrieval failed with error code: 500",
+        snackPosition: SnackPosition.TOP,
+        duration: const Duration(seconds: 1),
+      );
+    } else {
+      Get.snackbar(
+        "Failed",
+        "Check your internet connection",
+        snackPosition: SnackPosition.TOP,
+        duration: const Duration(seconds: 1),
+      );
     }
   }
 }
