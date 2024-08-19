@@ -5,6 +5,7 @@ class CourseManageController extends GetxController {
   final courseCategoryController = TextEditingController();
   final courseDescriptionController = TextEditingController();
   var isCreating = false.obs;
+  var isUpdating = false.obs;
   var courses = <dynamic>[].obs;
 
   @override
@@ -64,6 +65,45 @@ class CourseManageController extends GetxController {
       Get.snackbar("Failed", "Course deletion failed",
           snackPosition: SnackPosition.TOP,
           duration: const Duration(seconds: 1));
+    }
+  }
+
+  Future<void> updateCourse({
+    required int id,
+    required String courseTitle,
+    required String courseCategory,
+    required String courseDescription,
+  }) async {
+    isUpdating.value = true;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = prefs.getString(Special.LOGIN_TOKEN.toString()) ?? '';
+    var response = await ManageCoursesService().updateCourse(
+        id: id,
+        token: token,
+        courseTitle: courseTitle,
+        courseCategory: courseCategory,
+        courseDescription: courseDescription);
+    print('response:---------------> ${response?.statusCode}');
+    if (response?.statusCode == 200) {
+      print('response:----------dddddddddddddd-----> ${response?.statusCode}');
+      //
+      getAllCoursesByInstructor();
+      isUpdating.value = false;
+      Get.snackbar("Success", "Course updated successfully",
+          snackPosition: SnackPosition.TOP,
+          duration: const Duration(seconds: 1));
+
+      await Future.delayed(const Duration(seconds: 2));
+
+      Get.back();
+      Get.back();
+
+
+    } else {
+      Get.snackbar("Failed", "Course update failed",
+          snackPosition: SnackPosition.TOP,
+          duration: const Duration(seconds: 1));
+
     }
   }
 

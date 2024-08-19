@@ -1,5 +1,3 @@
-import 'package:learning_management_systemo_v01/controllers/instructor_controllers/course_manage_controller.dart';
-
 import '../../utils/imports/import_list.dart';
 
 class CreateCourseScreen extends StatelessWidget {
@@ -60,17 +58,6 @@ class CreateCourseScreen extends StatelessWidget {
                         );
                 },
               ),
-              // ElevatedButton(
-              //   onPressed: () {
-              //     print('Send the data ---------------->');
-              //     createCourseController.createCourse();
-              //   },
-              //   child: CustomLabel().customLabel(
-              //     text: 'Create Course',
-              //     fontSize: 24,
-              //     color: Colors.lightBlue,
-              //   ),
-              // ),
             ],
           ),
         ),

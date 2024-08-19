@@ -92,6 +92,58 @@ class ManageCoursesService {
         },
       );
     }
-    // final response =  await  dio.delete('${Const.BASE_URL}/courses/$id',);
+  }
+
+  Future<Response?> updateCourse(
+      {required int id,
+      required String token,
+      required String courseTitle,
+      required String courseCategory,
+      required String courseDescription}) async {
+    try {
+      var header = {
+        "Accept": "application/json",
+        "Authorization": "Bearer $token"
+      };
+
+      var data = {
+        "course": id,
+        "title": courseTitle,
+        "category": courseCategory,
+        "description": courseDescription
+      };
+      var response = await dio.post(
+        '${Const.BASE_URL}/courses/$id/update',
+        data: data,
+        options: Options(headers: header),
+      );
+      print('Update course ---------->: $response');
+      print('Update course status code ---------->: ${response.statusCode}');
+      return response;
+    } on DioError catch (e) {
+      if (e.response != null) {
+        print('DioError: ${e.response?.data}');
+        return e.response;
+      } else {
+        print('DioError without response: ${e.message}');
+        return Response(
+          requestOptions: e.requestOptions,
+          statusCode: 500,
+          statusMessage: e.message,
+          data: {'error': 'Network or server issue', 'details': e.message},
+        );
+      }
+    } catch (e) {
+      print('Unexpected error: $e');
+      return Response(
+        requestOptions: RequestOptions(path: ''),
+        statusCode: 500,
+        statusMessage: 'Unexpected error',
+        data: {
+          'error': 'An unexpected error occurred',
+          'details': e.toString()
+        },
+      );
+    }
   }
 }
