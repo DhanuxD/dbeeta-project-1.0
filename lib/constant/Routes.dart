@@ -1,3 +1,5 @@
+import 'package:learning_management_systemo_v01/screens/instructor_screen/edit_course_screen.dart';
+
 import '../utils/imports/import_list.dart';
 
 class Routes {
@@ -8,6 +10,7 @@ class Routes {
   static const REGISTER = '/register';
   static const COURSE_DETAILS = '/courseDetails';
   static const CREATE_COURSE = '/createCourse';
+  static const UPDATE_COURSE = '/updateCourse';
 
   static List<GetPage> getPageRoutes() {
     return [
@@ -18,6 +21,7 @@ class Routes {
       GetPage(name: INSTRUCTOR_HOME, page: () =>  InstructorHomeScreen()),
       GetPage(name: COURSE_DETAILS, page: () =>  CoursesDetailsScreen()),
       GetPage(name: CREATE_COURSE, page: () =>   CreateCourseScreen()),
+      GetPage(name: UPDATE_COURSE, page: () =>   UpdateCourseScreen()),
     ];
   }
 }
