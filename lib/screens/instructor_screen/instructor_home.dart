@@ -10,7 +10,6 @@ class InstructorHomeScreen extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async {
         SystemChannels.platform.invokeMethod('SystemNavigator.pop');
-
         return false;
       },
       child: Scaffold(
@@ -28,14 +27,13 @@ class InstructorHomeScreen extends StatelessWidget {
             PopupMenuButton<int>(
               onSelected: (value) async {
                 if (value == 0) {
-                } else if (value == 1) {
-                }
+                  Get.toNamed(Routes.CREATE_COURSE);
+                } else if (value == 1) {}
               },
-              itemBuilder: (context) =>
-              [
+              itemBuilder: (context) => [
                 const PopupMenuItem(
                   value: 0,
-                  child: Text("My Account"),
+                  child: Text("Create Course"),
                 ),
                 const PopupMenuItem(
                   value: 1,
@@ -46,8 +44,7 @@ class InstructorHomeScreen extends StatelessWidget {
             ),
             IconButton(
               onPressed: () async {
-
-                  _authController.logoutUser();
+                _authController.logoutUser();
               },
               icon: const Icon(Icons.logout),
             ),

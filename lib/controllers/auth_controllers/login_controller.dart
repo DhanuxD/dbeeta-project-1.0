@@ -1,5 +1,4 @@
 import 'package:learning_management_systemo_v01/models/user_model.dart';
-
 import '../../utils/imports/import_list.dart';
 
 class LoginController extends GetxController {
@@ -37,6 +36,7 @@ class LoginController extends GetxController {
         isLoading.value = false;
         UserModel user = UserModel.fromJson(response!);
         print('User role--------->: ${user.role}');
+        print('User role--------->: ${prefs.getString(Special.LOGIN_TOKEN.toString())}');
         prefs.setString(Special.USER_ROLE.toString(), user.role);
 
         if (user.role == Const.INSTRUCTOR) {
