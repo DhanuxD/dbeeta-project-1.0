@@ -27,6 +27,9 @@ export 'package:learning_management_systemo_v01/services/remote/auth_services.da
 export '../../constant/const.dart';
 export '../../models/course_model.dart';
 export '../../services/remote/student_services/course_service.dart';
-export 'package:learning_management_systemo_v01/controllers/courses_controller/courses_controller.dart';
+export 'package:learning_management_systemo_v01/controllers/student_controllers/courses_controller.dart';
+export 'package:learning_management_systemo_v01/screens/instructor_screen/create_course.dart';
+export 'package:learning_management_systemo_v01/screens/instructor_screen/instructor_home.dart';
+export 'package:learning_management_systemo_v01/screens/student_screen/courses_details.dart';
 
 
