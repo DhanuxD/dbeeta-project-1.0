@@ -31,5 +31,7 @@ export 'package:learning_management_systemo_v01/controllers/student_controllers/
 export 'package:learning_management_systemo_v01/screens/instructor_screen/create_course.dart';
 export 'package:learning_management_systemo_v01/screens/instructor_screen/instructor_home.dart';
 export 'package:learning_management_systemo_v01/screens/student_screen/courses_details.dart';
+export '../../controllers/instructor_controllers/course_manage_controller.dart';
+export 'package:learning_management_systemo_v01/services/remote/instructor_services/manage_courses_service.dart';
 
-
+export '../../models/user_model.dart';

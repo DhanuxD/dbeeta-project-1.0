@@ -1,12 +1,12 @@
-import 'package:learning_management_systemo_v01/controllers/instructor_controllers/create_course_controller.dart';
+import 'package:learning_management_systemo_v01/controllers/instructor_controllers/course_manage_controller.dart';
 
 import '../../utils/imports/import_list.dart';
 
 class CreateCourseScreen extends StatelessWidget {
   CreateCourseScreen({super.key});
 
-  CreateCourseController createCourseController =
-      Get.put(CreateCourseController());
+  CourseManageController createCourseController =
+      Get.put(CourseManageController());
 
   @override
   Widget build(BuildContext context) {
