@@ -34,3 +34,6 @@ export 'package:learning_management_systemo_v01/screens/student_screen/courses_d
 export '../../controllers/instructor_controllers/course_manage_controller.dart';
 export 'package:learning_management_systemo_v01/services/remote/instructor_services/manage_courses_service.dart';
 export '../../models/user_model.dart';
+export '../../services/remote/student_services/enrollment_service.dart';
+export 'package:learning_management_systemo_v01/controllers/student_controllers/entroll_controller.dart';
+export 'package:learning_management_systemo_v01/utils/imports/import_list.dart';
